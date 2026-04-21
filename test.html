@@ -1,8 +1,9 @@
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ЭТО ГЛАВНОЕ: подключение Telegram SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <meta charset="UTF-8">
     <title>Псалом 1 | Теѓилим</title>
     
@@ -84,4 +85,17 @@ td {
 <B>6</B> Ибо знает Г-сподь путь праведников, а путь нечестивых сгинет. <B>{P}</B>
 </TD></TR>
 </TABLE>
+    <script>
+        // Инициализация мини-приложения
+        const tg = window.Telegram.WebApp;
+        
+        // Сообщаем Telegram, что приложение готово
+        tg.ready();
+        
+        // Растягиваем приложение на весь экран (убираем отступы)
+        tg.expand();
+        
+        // (Опционально) Меняем цвет шапки в Telegram
+        tg.setHeaderColor('bg_color');
+    </script>
 </body></html>
