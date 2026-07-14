@@ -2,161 +2,110 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- ЭТО ГЛАВНОЕ: подключение Telegram SDK -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <meta charset="UTF-8">
     <title>Псалом 1 תְּהִלִּים</title>
     
-    <!-- ОСНОВНЫЕ МЕТА-ТЕГИ ДЛЯ ПРЕВЬЮ -->
     <meta property="og:title" content="Псалом 1 תְּהִלִּים" />
     <meta property="og:description" content="Счастлив человек, который не ходил по совету нечестивых, и на пути грешников не стоял..." />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https://life8650498.github.io/content/test.html" />
-    
-    <!-- КАРТИНКА ДЛЯ ПРЕВЬЮ (ОБЯЗАТЕЛЬНО!) -->
     <meta property="og:image" content="https://life8650498.github.io/content/tanakh.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    
-    <!-- ДЛЯ TWITTER (ТОЖЕ РАБОТАЕТ В TELEGRAM) -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Псалом 1 תְּהִלִּים" />
     <meta name="twitter:description" content="Счастлив человек, который не ходил по совету нечестивых..." />
     <meta name="twitter:image" content="https://life8650498.github.io/content/tanakh.png" />
-    
-    <!-- ОБЫЧНЫЙ ЗАГОЛОВОК (FALLBACK) -->
     <meta name="description" content="Счастлив человек, который не ходил по совету нечестивых..." />
     
     <style>
-        /* ========== CSS ПЕРЕМЕННЫЕ ========== */
-        :root {
-            /* Светлая тема (по умолчанию) */
-            --bg-color: #ffffff;
-            --text-color: #000000;
-            --hint-color: #707579;
-            --link-color: #2678b6;
-            --button-color: #2678b6;
-            --button-text-color: #ffffff;
-            --secondary-bg-color: #f4f4f5;
-            --header-bg-color: #ffffff;
-            --border-color: #e3e3e3;
-        }
-
-        /* Темная тема через системный медиа-запрос (запасной вариант) */
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-color: #0a0a0a;
-                --text-color: #ffffff;
-                --hint-color: #8a8a8e;
-                --link-color: #6ab3f7;
-                --button-color: #6ab3f7;
-                --button-text-color: #ffffff;
-                --secondary-bg-color: #1c1c1e;
-                --header-bg-color: #0a0a0a;
-                --border-color: #2a2a2c;
-            }
-        }
-
-        /* ========== СБРАСЫВАЕМ ВСЕ СТАНДАРТНЫЕ СТИЛИ ========== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-        }
-
-        /* ========== ОСНОВНЫЕ СТИЛИ ========== */
-        html, body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
+        /* ========== БАЗОВЫЕ СТИЛИ С ПРЯМЫМИ ЦВЕТАМИ ========== */
+        body {
+            background-color: #ffffff;
+            color: #000000;
             font-size: 18px;
             line-height: 1.6;
             padding: 16px;
             margin: 0;
             min-height: 100vh;
-            width: 100%;
-            overflow-x: hidden;
+            transition: background-color 0.3s, color 0.3s;
         }
 
-        /* Заголовок */
+        /* ДЛЯ ТЕМНОЙ ТЕМЫ ЧЕРЕЗ МЕДИА-ЗАПРОС */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #0a0a0a !important;
+                color: #ffffff !important;
+            }
+            
+            table, td {
+                background-color: #0a0a0a !important;
+                color: #ffffff !important;
+            }
+            
+            h1 {
+                color: #ffffff !important;
+            }
+            
+            .h {
+                color: #ffffff !important;
+            }
+        }
+
         h1 {
-            color: var(--text-color);
+            color: #000000;
             margin-bottom: 20px;
             font-size: 24px;
+            transition: color 0.3s;
         }
 
-        /* Ссылки */
-        a {
-            color: var(--link-color);
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        /* Еврейский текст */
         .h {
-            color: var(--text-color);
+            color: #000000;
             direction: rtl;
             unicode-bidi: embed;
             font-family: 'Times New Roman', 'Arial Hebrew', serif;
+            transition: color 0.3s;
         }
 
-        /* ========== ТАБЛИЦА - ГЛАВНАЯ ЧАСТЬ ========== */
+        /* ========== ТАБЛИЦА ========== */
         table {
             width: 100%;
             border-collapse: collapse;
-            background-color: var(--bg-color);  /* ФОН ТАБЛИЦЫ */
-            margin: 0;
-            padding: 0;
+            background-color: #ffffff;
+            transition: background-color 0.3s;
         }
 
-        /* ВСЕ ЯЧЕЙКИ ТАБЛИЦЫ */
         td {
-            background-color: var(--bg-color);  /* ЯВНЫЙ ФОН ЯЧЕЕК */
-            color: var(--text-color);           /* ЦВЕТ ТЕКСТА */
+            background-color: #ffffff;
+            color: #000000;
             word-break: break-word;
             padding: 10px 6px;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid #e3e3e3;
             vertical-align: top;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         }
 
-        /* Убираем рамку у последней строки */
         tr:last-child td {
             border-bottom: none;
         }
 
-        /* Стиль для левой колонки (иврит) */
         td:first-child {
             padding-right: 10px;
             width: 50%;
         }
 
-        /* Стиль для правой колонки (русский) */
         td:last-child {
             padding-left: 10px;
             width: 50%;
         }
 
-        /* Дополнительно: если таблицы внутри таблиц */
-        table table td {
-            background-color: var(--bg-color);
-        }
-
-        /* Убираем все возможные фоны у элементов внутри ячеек */
-        td * {
-            background-color: transparent !important;
-            color: inherit;
-        }
-
-        /* Стиль для номеров стихов */
         td b {
-            color: var(--hint-color);
+            color: #707579;
             font-weight: bold;
         }
 
-        /* ========== АДАПТИВ ДЛЯ МАЛЕНЬКИХ ЭКРАНОВ ========== */
+        /* Адаптив */
         @media (max-width: 600px) {
             body {
                 padding: 10px;
@@ -172,7 +121,7 @@
             
             tr {
                 display: block;
-                border-bottom: 2px solid var(--border-color);
+                border-bottom: 2px solid #e3e3e3;
                 margin-bottom: 10px;
                 padding-bottom: 10px;
             }
@@ -196,7 +145,6 @@
 <body>
     <h1 align="center">Псалом 1 <span class="h">תְּהִלִּים</span></h1>
     
-    <!-- УБРАЛ ВСЕ АТРИБУТЫ cellpadding, cellspacing, bgcolor -->
     <table>
         <tr>
             <td class="h">
@@ -261,45 +209,89 @@
     <script>
         // Инициализация мини-приложения
         const tg = window.Telegram.WebApp;
-        
-        // Сообщаем Telegram, что приложение готово
         tg.ready();
-        
-        // Растягиваем приложение на весь экран
         tg.expand();
         
+        // ========== ДИАГНОСТИКА ==========
+        console.log('=== Telegram Theme Debug ===');
+        console.log('tg.themeParams:', tg.themeParams);
+        console.log('Color scheme:', window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        
         // ========== ПРИМЕНЯЕМ ЦВЕТА ИЗ TELEGRAM ==========
-        function applyTheme() {
-            if (tg.themeParams) {
+        function applyTelegramTheme() {
+            if (tg.themeParams && tg.themeParams.bg_color) {
                 const params = tg.themeParams;
+                console.log('Applying Telegram theme:', params);
                 
-                // Применяем цвета к корневому элементу
-                const root = document.documentElement;
-                root.style.setProperty('--bg-color', params.bg_color || '#ffffff');
-                root.style.setProperty('--text-color', params.text_color || '#000000');
-                root.style.setProperty('--hint-color', params.hint_color || '#707579');
-                root.style.setProperty('--link-color', params.link_color || '#2678b6');
-                root.style.setProperty('--button-color', params.button_color || '#2678b6');
-                root.style.setProperty('--button-text-color', params.button_text_color || '#ffffff');
-                root.style.setProperty('--secondary-bg-color', params.secondary_bg_color || '#f4f4f5');
-                root.style.setProperty('--header-bg-color', params.header_bg_color || '#ffffff');
+                // Применяем цвета ко всем элементам через inline-стили (самый надежный способ)
+                document.body.style.backgroundColor = params.bg_color;
+                document.body.style.color = params.text_color;
                 
-                // Дополнительно: принудительно применяем фон ко всем элементам
-                document.body.style.backgroundColor = params.bg_color || '#ffffff';
-                document.querySelectorAll('td, table').forEach(el => {
-                    el.style.backgroundColor = params.bg_color || '#ffffff';
+                // Все таблицы и ячейки
+                document.querySelectorAll('table, td').forEach(el => {
+                    el.style.backgroundColor = params.bg_color;
+                    el.style.color = params.text_color;
                 });
+                
+                // Заголовок
+                document.querySelector('h1').style.color = params.text_color;
+                
+                // Еврейский текст
+                document.querySelectorAll('.h').forEach(el => {
+                    el.style.color = params.text_color;
+                });
+                
+                // Номера стихов
+                document.querySelectorAll('td b').forEach(el => {
+                    el.style.color = params.hint_color || '#707579';
+                });
+                
+                // Границы таблицы
+                document.querySelectorAll('td').forEach(el => {
+                    el.style.borderBottomColor = params.hint_color || '#e3e3e3';
+                });
+                
+                console.log('Theme applied successfully!');
+            } else {
+                console.log('No Telegram theme params, using system theme');
+                // Если Telegram не передал цвета, используем системную тему
+                const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (isDark) {
+                    document.body.style.backgroundColor = '#0a0a0a';
+                    document.body.style.color = '#ffffff';
+                    document.querySelectorAll('table, td').forEach(el => {
+                        el.style.backgroundColor = '#0a0a0a';
+                        el.style.color = '#ffffff';
+                    });
+                    document.querySelector('h1').style.color = '#ffffff';
+                    document.querySelectorAll('.h').forEach(el => {
+                        el.style.color = '#ffffff';
+                    });
+                }
             }
         }
 
-        // Применяем тему сразу
-        applyTheme();
+        // Применяем тему
+        applyTelegramTheme();
 
-        // Меняем цвет шапки в Telegram
+        // Следим за сменой темы
+        tg.onEvent('themeChanged', function() {
+            console.log('Theme changed event fired!');
+            applyTelegramTheme();
+        });
+
+        // Также следим за системной темой (если Telegram не передает цвета)
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+            if (!tg.themeParams || !tg.themeParams.bg_color) {
+                console.log('System theme changed, reapplying...');
+                applyTelegramTheme();
+            }
+        });
+
+        // Меняем цвет шапки
         tg.setHeaderColor('bg_color');
         
-        // Следим за сменой темы в реальном времени
-        tg.onEvent('themeChanged', applyTheme);
+        console.log('=== End of debug ===');
     </script>
 </body>
 </html>
