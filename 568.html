@@ -57,31 +57,42 @@
             }
         }
 
-        /* ========== СТИЛИ ========== */
+        /* ========== СБРАСЫВАЕМ ВСЕ СТАНДАРТНЫЕ СТИЛИ ========== */
         * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
-        body {
+        /* ========== ОСНОВНЫЕ СТИЛИ ========== */
+        html, body {
             background-color: var(--bg-color);
             color: var(--text-color);
             font-size: 18px;
             line-height: 1.6;
             padding: 16px;
             margin: 0;
-            max-width: 100%;
-            overflow-x: hidden;
             min-height: 100vh;
+            width: 100%;
+            overflow-x: hidden;
         }
 
         /* Заголовок */
         h1 {
             color: var(--text-color);
+            margin-bottom: 20px;
+            font-size: 24px;
         }
 
-        /* Ссылки (если появятся) */
+        /* Ссылки */
         a {
             color: var(--link-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
         }
 
         /* Еврейский текст */
@@ -89,20 +100,24 @@
             color: var(--text-color);
             direction: rtl;
             unicode-bidi: embed;
+            font-family: 'Times New Roman', 'Arial Hebrew', serif;
         }
 
-        /* ========== ГЛАВНОЕ: ФОН ДЛЯ ТАБЛИЦЫ И ЯЧЕЕК ========== */
+        /* ========== ТАБЛИЦА - ГЛАВНАЯ ЧАСТЬ ========== */
         table {
             width: 100%;
             border-collapse: collapse;
-            background-color: var(--bg-color);
+            background-color: var(--bg-color);  /* ФОН ТАБЛИЦЫ */
+            margin: 0;
+            padding: 0;
         }
 
+        /* ВСЕ ЯЧЕЙКИ ТАБЛИЦЫ */
         td {
-            background-color: var(--bg-color);  /* ЯВНО ЗАДАЁМ ФОН */
-            color: var(--text-color);
+            background-color: var(--bg-color);  /* ЯВНЫЙ ФОН ЯЧЕЕК */
+            color: var(--text-color);           /* ЦВЕТ ТЕКСТА */
             word-break: break-word;
-            padding: 8px 4px;
+            padding: 10px 6px;
             border-bottom: 1px solid var(--border-color);
             vertical-align: top;
         }
@@ -112,25 +127,86 @@
             border-bottom: none;
         }
 
-        /* Дополнительно: если используются таблицы внутри */
+        /* Стиль для левой колонки (иврит) */
+        td:first-child {
+            padding-right: 10px;
+            width: 50%;
+        }
+
+        /* Стиль для правой колонки (русский) */
+        td:last-child {
+            padding-left: 10px;
+            width: 50%;
+        }
+
+        /* Дополнительно: если таблицы внутри таблиц */
         table table td {
             background-color: var(--bg-color);
+        }
+
+        /* Убираем все возможные фоны у элементов внутри ячеек */
+        td * {
+            background-color: transparent !important;
+            color: inherit;
+        }
+
+        /* Стиль для номеров стихов */
+        td b {
+            color: var(--hint-color);
+            font-weight: bold;
+        }
+
+        /* ========== АДАПТИВ ДЛЯ МАЛЕНЬКИХ ЭКРАНОВ ========== */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+                font-size: 16px;
+            }
+            
+            td {
+                padding: 8px 4px;
+                display: block;
+                width: 100% !important;
+                border-bottom: none;
+            }
+            
+            tr {
+                display: block;
+                border-bottom: 2px solid var(--border-color);
+                margin-bottom: 10px;
+                padding-bottom: 10px;
+            }
+            
+            tr:last-child {
+                border-bottom: none;
+                margin-bottom: 0;
+                padding-bottom: 0;
+            }
+            
+            td:first-child {
+                padding-right: 4px;
+            }
+            
+            td:last-child {
+                padding-left: 4px;
+            }
         }
     </style>
 </head>
 <body>
     <h1 align="center">Псалом 1 <span class="h">תְּהִלִּים</span></h1>
     
-    <table cellpadding="4" cellspacing="0" width="100%">
+    <!-- УБРАЛ ВСЕ АТРИБУТЫ cellpadding, cellspacing, bgcolor -->
+    <table>
         <tr>
-            <td class="h" width="50%">
+            <td class="h">
                 <a name="1"></a>
                 <b>א</b> אַשְׁרֵי הָאִישׁ-- אֲשֶׁר לֹא הָלַךְ, בַּעֲצַת רְשָׁעִים;<br>
                 וּבְדֶרֶךְ חַטָּאִים, לֹא עָמָד, וּבְמוֹשַׁב לֵצִים, לֹא יָשָׁב.
             </td>
             <td>
                 <b>1.</b> Счастлив человек, который не ходил по совету нечестивых, <br>
-                и на пути грешников не стоял, и в собрании легкомысленных не сидел.<br>
+                и на пути грешников не стоял, и в собрании легкомысленных не сидел.
             </td>
         </tr>
         <tr>
@@ -139,7 +215,7 @@
                 <b>ב</b> כִּי אִם בְּתוֹרַת יְהוָה, חֶפְצוֹ; וּבְתוֹרָתוֹ יֶהְגֶּה, יוֹמָם וָלָיְלָה.
             </td>
             <td>
-                <b>2.</b> Только к Торе Г-сподней влечение его, и Тору Его изучает он днем и ночью.<br>
+                <b>2.</b> Только к Торе Г-сподней влечение его, и Тору Его изучает он днем и ночью.
             </td>
         </tr>
         <tr>
@@ -150,7 +226,7 @@
             </td>
             <td>
                 <b>3.</b> И будет он, как дерево, посаженное при потоках вод, <br>
-                которое плод свой дает во время свое и чей лист не вянет; и во всем, что ни сделает он, преуспеет.<br>
+                которое плод свой дает во время свое и чей лист не вянет; и во всем, что ни сделает он, преуспеет.
             </td>
         </tr>
         <tr>
@@ -159,7 +235,7 @@
                 <b>ד</b> לֹא-כֵן הָרְשָׁעִים: כִּי אִם-כַּמֹּץ, אֲשֶׁר-תִּדְּפֶנּוּ רוּחַ.
             </td>
             <td>
-                <b>4.</b> Не таковы нечестивые, но как мякина (они), которую развевает ветер.<br>
+                <b>4.</b> Не таковы нечестивые, но как мякина (они), которую развевает ветер.
             </td>
         </tr>
         <tr>
@@ -168,7 +244,7 @@
                 <b>ה</b> עַל-כֵּן, לֹא-יָקֻמוּ רְשָׁעִים--בַּמִּשְׁפָּט; וְחַטָּאִים, בַּעֲדַת צַדִּיקִים.
             </td>
             <td>
-                <b>5.</b> Поэтому не устоят нечестивые на суде и грешники – в общине праведников,<br>
+                <b>5.</b> Поэтому не устоят нечестивые на суде и грешники – в общине праведников,
             </td>
         </tr>
         <tr>
@@ -197,14 +273,22 @@
             if (tg.themeParams) {
                 const params = tg.themeParams;
                 
-                document.documentElement.style.setProperty('--bg-color', params.bg_color || '#ffffff');
-                document.documentElement.style.setProperty('--text-color', params.text_color || '#000000');
-                document.documentElement.style.setProperty('--hint-color', params.hint_color || '#707579');
-                document.documentElement.style.setProperty('--link-color', params.link_color || '#2678b6');
-                document.documentElement.style.setProperty('--button-color', params.button_color || '#2678b6');
-                document.documentElement.style.setProperty('--button-text-color', params.button_text_color || '#ffffff');
-                document.documentElement.style.setProperty('--secondary-bg-color', params.secondary_bg_color || '#f4f4f5');
-                document.documentElement.style.setProperty('--header-bg-color', params.header_bg_color || '#ffffff');
+                // Применяем цвета к корневому элементу
+                const root = document.documentElement;
+                root.style.setProperty('--bg-color', params.bg_color || '#ffffff');
+                root.style.setProperty('--text-color', params.text_color || '#000000');
+                root.style.setProperty('--hint-color', params.hint_color || '#707579');
+                root.style.setProperty('--link-color', params.link_color || '#2678b6');
+                root.style.setProperty('--button-color', params.button_color || '#2678b6');
+                root.style.setProperty('--button-text-color', params.button_text_color || '#ffffff');
+                root.style.setProperty('--secondary-bg-color', params.secondary_bg_color || '#f4f4f5');
+                root.style.setProperty('--header-bg-color', params.header_bg_color || '#ffffff');
+                
+                // Дополнительно: принудительно применяем фон ко всем элементам
+                document.body.style.backgroundColor = params.bg_color || '#ffffff';
+                document.querySelectorAll('td, table').forEach(el => {
+                    el.style.backgroundColor = params.bg_color || '#ffffff';
+                });
             }
         }
 
