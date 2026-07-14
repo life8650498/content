@@ -257,10 +257,10 @@
                 // Если Telegram не передал цвета, используем системную тему
                 const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
                 if (isDark) {
-                    document.body.style.backgroundColor = '#0a0a0a';
+                    document.body.style.backgroundColor = '#0f0f12';
                     document.body.style.color = '#ffffff';
                     document.querySelectorAll('table, td').forEach(el => {
-                        el.style.backgroundColor = '#0a0a0a';
+                        el.style.backgroundColor = '#0f0f12';
                         el.style.color = '#ffffff';
                     });
                     document.querySelector('h1').style.color = '#ffffff';
