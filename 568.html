@@ -58,6 +58,10 @@
         }
 
         /* ========== СТИЛИ ========== */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
@@ -67,7 +71,7 @@
             margin: 0;
             max-width: 100%;
             overflow-x: hidden;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            min-height: 100vh;
         }
 
         /* Заголовок */
@@ -87,29 +91,37 @@
             unicode-bidi: embed;
         }
 
-        /* Таблицы и длинные строки */
-        table, pre, .verse {
-            max-width: 100%;
-            overflow-x: auto;
-            display: block;
+        /* ========== ГЛАВНОЕ: ФОН ДЛЯ ТАБЛИЦЫ И ЯЧЕЕК ========== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--bg-color);
         }
 
         td {
-            word-break: break-word;
+            background-color: var(--bg-color);  /* ЯВНО ЗАДАЁМ ФОН */
             color: var(--text-color);
-            border-color: var(--border-color);
+            word-break: break-word;
+            padding: 8px 4px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
         }
 
-        /* Дополнительно — для плавности */
-        * {
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        /* Убираем рамку у последней строки */
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Дополнительно: если используются таблицы внутри */
+        table table td {
+            background-color: var(--bg-color);
         }
     </style>
 </head>
 <body>
     <h1 align="center">Псалом 1 <span class="h">תְּהִלִּים</span></h1>
     
-    <table cellpadding="4" cellspacing="4" width="100%">
+    <table cellpadding="4" cellspacing="0" width="100%">
         <tr>
             <td class="h" width="50%">
                 <a name="1"></a>
@@ -181,28 +193,10 @@
         tg.expand();
         
         // ========== ПРИМЕНЯЕМ ЦВЕТА ИЗ TELEGRAM ==========
-        // Если Telegram передал параметры темы — используем их
-        if (tg.themeParams) {
-            const params = tg.themeParams;
-            
-            // Применяем цвета к CSS-переменным
-            document.documentElement.style.setProperty('--bg-color', params.bg_color || '#ffffff');
-            document.documentElement.style.setProperty('--text-color', params.text_color || '#000000');
-            document.documentElement.style.setProperty('--hint-color', params.hint_color || '#707579');
-            document.documentElement.style.setProperty('--link-color', params.link_color || '#2678b6');
-            document.documentElement.style.setProperty('--button-color', params.button_color || '#2678b6');
-            document.documentElement.style.setProperty('--button-text-color', params.button_text_color || '#ffffff');
-            document.documentElement.style.setProperty('--secondary-bg-color', params.secondary_bg_color || '#f4f4f5');
-            document.documentElement.style.setProperty('--header-bg-color', params.header_bg_color || '#ffffff');
-        }
-
-        // (Опционально) Меняем цвет шапки в Telegram
-        tg.setHeaderColor('bg_color');
-        
-        // (Опционально) Следим за сменой темы в реальном времени
-        tg.onEvent('themeChanged', function() {
-            const params = tg.themeParams;
-            if (params) {
+        function applyTheme() {
+            if (tg.themeParams) {
+                const params = tg.themeParams;
+                
                 document.documentElement.style.setProperty('--bg-color', params.bg_color || '#ffffff');
                 document.documentElement.style.setProperty('--text-color', params.text_color || '#000000');
                 document.documentElement.style.setProperty('--hint-color', params.hint_color || '#707579');
@@ -212,7 +206,16 @@
                 document.documentElement.style.setProperty('--secondary-bg-color', params.secondary_bg_color || '#f4f4f5');
                 document.documentElement.style.setProperty('--header-bg-color', params.header_bg_color || '#ffffff');
             }
-        });
+        }
+
+        // Применяем тему сразу
+        applyTheme();
+
+        // Меняем цвет шапки в Telegram
+        tg.setHeaderColor('bg_color');
+        
+        // Следим за сменой темы в реальном времени
+        tg.onEvent('themeChanged', applyTheme);
     </script>
 </body>
 </html>
